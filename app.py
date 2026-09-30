@@ -8,7 +8,7 @@ app.secret_key = "fba_2026_secret"
 def init_db():
     con = sqlite3.connect("fba.db")
     con.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, email TEXT UNIQUE, password TEXT)")
-    con.execute("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, user TEXT, content TEXT, time TEXT)")
+    con.execute("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, user TEXT, content TEXT, media TEXT, time TEXT)")
     con.close()
 
 init_db()
@@ -28,18 +28,13 @@ def register():
         name = request.form.get("name","").strip()
         email = request.form.get("email","").lower().strip()
         password = request.form.get("pass","").strip()
-        if not name or not email or not password:
-            return "All fields required!"
         try:
             con = sqlite3.connect("fba.db")
             con.execute("INSERT INTO users (name,email,password) VALUES (?,?,?)", (name, email, password))
-            con.commit()
-            con.close()
+            con.commit(); con.close()
             return redirect("/login")
-        except sqlite3.IntegrityError:
-            return "Email exists!"
-        except Exception as e:
-            return f"Error: {e}"
+        except:
+            return "Email already exists! <a href='/register'>Try again</a>"
     return render_template("register.html")
 
 @app.route("/login", methods=["GET","POST"])
@@ -53,20 +48,19 @@ def login():
         if user:
             session["user"] = user[1]
             return redirect("/")
-        else:
-            return "Wrong email or password!"
+        return "Wrong email/password! <a href='/login'>Try again</a>"
     return render_template("login.html")
 
 @app.route("/post", methods=["POST"])
 def post():
     content = request.form.get("content","").strip()
-    if not content:
+    media = request.form.get("media","").strip()
+    if not content and not media:
         return redirect("/")
-    time = datetime.now().strftime("%d %b %I:%M %p")
+    time = datetime.now().strftime("%d %b at %I:%M %p")
     con = sqlite3.connect("fba.db")
-    con.execute("INSERT INTO posts (user,content,time) VALUES (?,?,?)", (session["user"], content, time))
-    con.commit()
-    con.close()
+    con.execute("INSERT INTO posts (user,content,media,time) VALUES (?,?,?,?)", (session["user"], content, media, time))
+    con.commit(); con.close()
     return redirect("/")
 
 @app.route("/logout")
@@ -79,8 +73,7 @@ def reset():
     if os.path.exists("fba.db"):
         os.remove("fba.db")
     init_db()
-    return "Database Cleared! <a href='/register'>Register</a>"
+    return "Cleared! <a href='/register'>Register</a>"
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
