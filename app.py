@@ -25,9 +25,11 @@ def home():
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method == "POST":
-        name = request.form["name"].strip()
-        email = request.form["email"].lower().strip() # FIX 1
-        password = request.form["pass"].strip()
+        name = request.form.get("name","").strip()
+        email = request.form.get("email","").lower().strip()
+        password = request.form.get("pass","").strip()
+        if not name or not email or not password:
+            return "All fields required!"
         try:
             con = sqlite3.connect("fba.db")
             con.execute("INSERT INTO users (name,email,password) VALUES (?,?,?)", (name, email, password))
@@ -35,17 +37,18 @@ def register():
             con.close()
             return redirect("/login")
         except sqlite3.IntegrityError:
-            return "Email exists! অন্য Gmail দিয়ে ট্রাই করো বা Login করো।"
+            return "Email exists!"
         except Exception as e:
-            return f"Error: {str(e)}" # আসল Error দেখাবে
+            return f"Error: {e}"
     return render_template("register.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"].lower().strip()
+        email = request.form.get("email","").lower().strip()
+        password = request.form.get("pass","").strip()
         con = sqlite3.connect("fba.db")
-        user = con.execute("SELECT * FROM users WHERE email=? AND password=?", (email, request.form["pass"])).fetchone()
+        user = con.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password)).fetchone()
         con.close()
         if user:
             session["user"] = user[1]
@@ -56,9 +59,12 @@ def login():
 
 @app.route("/post", methods=["POST"])
 def post():
+    content = request.form.get("content","").strip()
+    if not content:
+        return redirect("/")
     time = datetime.now().strftime("%d %b %I:%M %p")
     con = sqlite3.connect("fba.db")
-    con.execute("INSERT INTO posts (user,content,time) VALUES (?,?,?)", (session["user"], request.form["content"], time))
+    con.execute("INSERT INTO posts (user,content,time) VALUES (?,?,?)", (session["user"], content, time))
     con.commit()
     con.close()
     return redirect("/")
@@ -68,13 +74,12 @@ def logout():
     session.clear()
     return redirect("/login")
 
-# নতুন - সব ডাটা ক্লিয়ার করার জন্য
 @app.route("/reset")
 def reset():
     if os.path.exists("fba.db"):
         os.remove("fba.db")
     init_db()
-    return "Database Cleared! এখন নতুন Gmail দিয়ে Register করো। <a href='/register'>Register</a>"
+    return "Database Cleared! <a href='/register'>Register</a>"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
