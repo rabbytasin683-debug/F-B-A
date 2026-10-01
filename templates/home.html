@@ -1,107 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>facebook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fba</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} body{background:#f0f2f5;font-family:Arial}
-.top{background:#fff;padding:8px 10px;position:sticky;top:0;z-index:99}
-.top1{display:flex;justify-content:space-between;align-items:center}
-.logo{color:#0866ff;font-size:29px;font-weight:900;letter-spacing:-1px}
-.icons{display:flex;gap:14px;font-size:22px;align-items:center}
-.icon-btn{background:#e4e6eb;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.tabs{display:flex;justify-content:space-between;margin-top:8px;border-bottom:1px solid #ddd;padding-bottom:2px}
-.tab{flex:1;text-align:center;padding:10px 0;font-size:24px;color:#65676b;position:relative}
+.top{background:#fff;position:sticky;top:0;z-index:99}
+.top1{display:flex;justify-content:space-between;align-items:center;padding:8px 10px}
+.logo{color:#0866ff;font-size:28px;font-weight:900;letter-spacing:2px}
+.icon-btn{background:#e4e6eb;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.tabs{display:flex;border-bottom:1px solid #ddd}
+.tab{flex:1;text-align:center;padding:10px 0;font-size:22px;color:#65676b;cursor:pointer}
 .tab.active{color:#0866ff;border-bottom:3px solid #0866ff}
-.badge{background:#ff3b30;color:#fff;font-size:11px;padding:1px 5px;border-radius:10px;position:absolute;top:2px;margin-left:-8px}
 .create-post{background:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px}
-.avatar{width:40px;height:40px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;background-size:cover}
-.input{flex:1;background:#f0f2f5;border:1px solid #ddd;border-radius:20px;padding:10px 14px;font-size:16px}
-.story-wrap{background:#fff;padding:10px 6px;display:flex;gap:8px;overflow-x:auto;margin-top:8px}
-.story{min-width:110px;height:180px;border-radius:15px;position:relative;background-size:cover;background-position:center;overflow:hidden;flex-shrink:0;box-shadow:0 1px 2px rgba(0,0,0,.2)}
-.story.bottom{position:absolute;bottom:0;background:linear-gradient(transparent, rgba(0,0,0,.7));width:100%;padding:8px;color:#fff;font-size:12px;font-weight:bold}
-.story.plus{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:#0866ff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;border:3px solid #fff}
-.ring{position:absolute;top:8px;left:8px;width:36px;height:36px;border-radius:50%;border:3px solid #0866ff;overflow:hidden;background:#fff}
+.avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#0866ff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.input{flex:1;background:#f0f2f5;border-radius:20px;padding:10px 14px}
+.story-wrap{background:#fff;display:flex;gap:8px;overflow-x:auto;padding:10px 6px;margin-top:8px}
+.story{min-width:110px;height:170px;border-radius:12px;position:relative;background-size:cover;flex-shrink:0}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;justify-content:center;align-items:flex-end}
+.modal-box{background:#fff;width:100%;max-width:500px;border-radius:15px 15px 0 0;padding:14px}
 .post-card{background:#fff;margin-top:8px}
-.post-head{display:flex;justify-content:space-between;padding:10px 12px;align-items:center}
-.post-info{display:flex;gap:8px;align-items:center}
-.p-avatar{width:40px;height:40px;border-radius:50%;background:#eee;border:2px solid #0866ff;padding:2px}
-.p-avatar img{width:100%;height:100%;border-radius:50%}
-.p-name{font-weight:bold;font-size:15px}
-.p-time{font-size:12px;color:#65676b}
-.p-text{padding:0 12px 10px;font-size:15px;line-height:1.3}
-.p-img{width:100%;display:block;max-height:600px;object-fit:cover}
-.p-actions{display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #ddd;margin:0 12px}
-.p-actions button{flex:1;background:none;border:0;padding:8px;color:#65676b;font-weight:600;font-size:14px}
-textarea{width:100%;border:0;outline:none;resize:none}
+.p-img{width:100%;max-height:600px;object-fit:cover;background:#000}
+.p-actions{display:flex;border-top:1px solid #ddd}.p-actions button{flex:1;background:none;border:0;padding:10px;font-weight:600;color:#65676b}
 </style>
 </head>
 <body>
 
 <div class="top">
 <div class="top1">
-<div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">☰</span><span class="logo">facebook</span></div>
-<div class="icons"><span class="icon-btn">＋</span><span style="font-size:26px">⌕</span><span class="icon-btn" style="background:#000;color:#fff">M</span></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="font-size:26px">☰</span><span class="logo">fba</span></div>
+<div style="display:flex;gap:10px"><div class="icon-btn" onclick="openModal()">＋</div><div class="icon-btn">⌕</div><div class="icon-btn" style="background:#000;color:#fff" onclick="location.href='/logout'">{{user[0]}}</div></div>
 </div>
 <div class="tabs">
-<div class="tab active">⌂</div>
-<div class="tab">▶<span class="badge">7</span></div>
+<div id="tab-home" class="tab active" onclick="showAll()">⌂</div>
+<div id="tab-video" class="tab" onclick="showVideos()">▶</div>
 <div class="tab">👥</div>
-<div class="tab">🏪<span class="badge">1</span></div>
+<div class="tab">🏪</div>
 <div class="tab">🔔</div>
 <div class="tab">◯</div>
 </div>
 </div>
 
-<!-- What's on your mind -->
-<div class="create-post">
-<div class="avatar" style="background-image:url('https://i.pravatar.cc/100?u={{user}}')">{{user[0]}}</div>
-<form method="POST" action="/post" enctype="multipart/form-data" style="flex:1;display:flex;align-items:center;gap:8px">
-<input type="text" name="content" class="input" placeholder="What's on your mind?">
-<label style="font-size:26px;cursor:pointer">🖼️<input type="file" name="file" accept="image/*,video/*" hidden onchange="this.form.submit()"></label>
+<div class="create-post" onclick="openModal()">
+<div class="avatar"><img src="https://i.pravatar.cc/100?u={{user}}" style="width:100%"></div>
+<div class="input">What's on your mind?</div>
+<div style="font-size:24px">🖼️</div>
+</div>
+
+<div class="story-wrap">
+<div class="story" style="background:#fff;border:1px solid #ddd" onclick="openModal()"><div style="height:65%;background:url('https://i.pravatar.cc/150?u={{user}}');background-size:cover"></div><div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:#0866ff;width:30px;height:30px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid #fff">+</div><div style="position:absolute;bottom:5px;width:100%;text-align:center;font-size:11px;font-weight:bold">Create story</div></div>
+<div class="story" style="background-image:url('https://picsum.photos/200/300?1')"><div style="position:absolute;bottom:5px;color:#fff;font-size:11px;font-weight:bold;padding:5px">My Story</div></div>
+</div>
+
+<div id="modal" class="modal" onclick="if(event.target==this)closeModal()">
+<div class="modal-box">
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding-bottom:8px"><b>Create post</b><span onclick="closeModal()" style="font-size:22px;cursor:pointer">✕</span></div>
+<form method="POST" action="/post" enctype="multipart/form-data">
+<textarea name="content" rows="4" placeholder="What's on your mind, {{user}}?" style="width:100%;border:0;outline:none;font-size:18px;margin-top:10px"></textarea>
+<img id="prevImg" style="width:100%;border-radius:8px;display:none;margin-top:8px">
+<video id="prevVid" controls style="width:100%;border-radius:8px;display:none;margin-top:8px"></video>
+<div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-top:10px;display:flex;justify-content:space-between"><span>Add to your post</span><label style="cursor:pointer">📷 Photo / 🎥 Video<input type="file" name="file" id="file" accept="image/*,video/*" hidden onchange="preview()"></label></div>
+<button style="background:#0866ff;color:#fff;width:100%;border:0;padding:10px;border-radius:6px;margin-top:12px;font-weight:bold">Post</button>
 </form>
 </div>
-
-<!-- Stories -->
-<div class="story-wrap">
-<div class="story" style="background:#fff;border:1px solid #ddd">
-<div style="height:65%;background:#000;background-image:url('https://i.pravatar.cc/150?u={{user}}');background-size:cover"></div>
-<div class="plus">+</div>
-<div style="padding:32px 5px 5px;text-align:center;font-size:12px;font-weight:bold;background:#fff">Create story</div>
-</div>
-<div class="story" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=12" style="width:100%"></div><div class="bottom">Md Meraj Hossain</div></div>
-<div class="story" style="background-image:url('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=33" style="width:100%"></div><div class="bottom">Sv tech</div></div>
-<div class="story" style="background-image:url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=20" style="width:100%"></div><div class="bottom">More Stories</div></div>
 </div>
 
-<!-- Posts Loop -->
+<div id="feed">
 {% for p in posts %}
-<div class="post-card">
-<div class="post-head">
-<div class="post-info">
-<div class="p-avatar"><img src="https://i.pravatar.cc/100?u={{p[1]}}"></div>
-<div><div class="p-name">{{p[1]}} <span style="color:#0866ff">✔</span></div><div class="p-time">{{p[4]}} · ⚙</div></div>
-</div>
-<div style="display:flex;gap:14px;font-size:20px;color:#65676b"><span>⋯</span><span>✕</span></div>
-</div>
-<div class="p-text">{{p[2]}}</div>
+<div class="post-card" data-type="{% if '.mp4' in p[3] or '.mov' in p[3] %}video{% else %}image{% endif %}">
+<div style="padding:10px;display:flex;gap:8px"><div class="avatar"><img src="https://i.pravatar.cc/100?u={{p[1]}}" style="width:100%"></div><div><div style="font-weight:bold">{{p[1]}}</div><div style="font-size:12px;color:#65676b">{{p[4]}}</div></div></div>
+{% if p[2] %}<div style="padding:0 10px 10px">{{p[2]}}</div>{% endif %}
 {% if p[3] %}
-  {% if '.mp4' in p[3] %}<video src="{{p[3]}}" controls class="p-img"></video>
-  {% else %}<img src="{{p[3]}}" class="p-img">{% endif %}
+  {% if '.mp4' in p[3] or '.mov' in p[3] or '.webm' in p[3] %}
+    <video src="{{p[3]}}" controls class="p-img" playsinline></video>
+  {% else %}
+    <img src="{{p[3]}}" class="p-img">
+  {% endif %}
 {% endif %}
 <div class="p-actions"><button>👍 Like</button><button>💬 Comment</button><button>↗ Share</button></div>
 </div>
 {% endfor %}
-
-<!-- Demo post like your screenshot -->
-{% if not posts %}
-<div class="post-card">
-<div class="post-head"><div class="post-info"><div class="p-avatar"><img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png"></div><div><div class="p-name">PizzaBurg <span style="color:#0866ff">✔</span></div><div class="p-time">14h · ⚙</div></div></div><div style="display:flex;gap:14px;font-size:20px;color:#65676b"><span>⋯</span><span>✕</span></div></div>
-<div class="p-text">দেশের সেরা বিফ চাপ পিৎজা!</div>
-<img src="https://i.ibb.co/8gZfZxT/buffalo.jpg" onerror="this.src='https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=600'" class="p-img">
-<div class="p-actions"><button>👍 Like</button><button>💬 Comment</button><button>↗ Share</button></div>
 </div>
-{% endif %}
 
+<script>
+function openModal(){document.getElementById('modal').style.display='flex'}
+function closeModal(){document.getElementById('modal').style.display='none'}
+function preview(){
+  let f=document.getElementById('file').files[0];
+  let img=document.getElementById('prevImg');
+  let vid=document.getElementById('prevVid');
+  img.style.display='none'; vid.style.display='none';
+  if(f.type.includes('video')){vid.style.display='block'; vid.src=URL.createObjectURL(f)}
+  else{img.style.display='block'; img.src=URL.createObjectURL(f)}
+}
+function showVideos(){
+  document.getElementById('tab-video').classList.add('active');
+  document.getElementById('tab-home').classList.remove('active');
+  document.querySelectorAll('.post-card').forEach(c=>{
+    c.style.display = c.dataset.type=='video'? 'block' : 'none';
+  });
+}
+function showAll(){
+  document.getElementById('tab-home').classList.add('active');
+  document.getElementById('tab-video').classList.remove('active');
+  document.querySelectorAll('.post-card').forEach(c=>c.style.display='block');
+}
+</script>
 </body>
 </html>
