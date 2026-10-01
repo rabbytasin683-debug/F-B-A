@@ -1,56 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>F-B-A</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>facebook</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#f0f2f5;font-family:Arial}
-.nav{background:#fff;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:8px 16px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.logo{color:#1877f2;font-size:32px;font-weight:bold}
-.nav input{background:#f0f2f5;border:0;padding:9px 12px;border-radius:20px;width:240px;outline:none}
-.layout{display:flex;max-width:1250px;margin:0 auto;gap:20px;padding:15px}
-.left,.right{width:280px;position:sticky;top:70px;height:fit-content}
-.center{flex:1;max-width:590px;margin:0 auto}
-.card{background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.1);padding:12px;margin-bottom:16px}
-.pro{display:flex;align-items:center;gap:10px}
-.avatar{width:40px;height:40px;background:#1877f2;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px}
-.btn{border:0;border-radius:6px;padding:8px 12px;font-weight:bold;cursor:pointer}
-.btn-blue{background:#1877f2;color:#fff;width:100%;padding:10px;font-size:16px}
-.btn-gray{background:#e4e6eb;width:100%}
-textarea{width:100%;border:0;outline:none;font-size:18px;resize:none;background:#f0f2f5;border-radius:20px;padding:10px 14px;margin-top:10px}
-.post{padding:12px}
-.post.u{font-weight:bold}
-.post.t{color:#65676b;font-size:12px}
-.post.c{margin:10px 0;font-size:15px;line-height:1.4}
-.post img,.post video{width:100%;border-radius:8px;margin-top:8px;max-height:600px;object-fit:cover}
-.actions{display:flex;border-top:1px solid #ddd;margin-top:10px;padding-top:6px}
-.actions button{flex:1;background:none;border:0;padding:8px;color:#65676b;font-weight:bold;cursor:pointer;border-radius:4px}
-.actions button:hover{background:#f2f2f2}
-#previewImg{width:100%;border-radius:8px;margin-top:10px;display:none}
-@media(max-width:900px){.left,.right{display:none}.nav input{width:120px}}
+*{margin:0;padding:0;box-sizing:border-box} body{background:#f0f2f5;font-family:Arial}
+.top{background:#fff;padding:8px 10px;position:sticky;top:0;z-index:99}
+.top1{display:flex;justify-content:space-between;align-items:center}
+.logo{color:#0866ff;font-size:29px;font-weight:900;letter-spacing:-1px}
+.icons{display:flex;gap:14px;font-size:22px;align-items:center}
+.icon-btn{background:#e4e6eb;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;justify-content:space-between;margin-top:8px;border-bottom:1px solid #ddd;padding-bottom:2px}
+.tab{flex:1;text-align:center;padding:10px 0;font-size:24px;color:#65676b;position:relative}
+.tab.active{color:#0866ff;border-bottom:3px solid #0866ff}
+.badge{background:#ff3b30;color:#fff;font-size:11px;padding:1px 5px;border-radius:10px;position:absolute;top:2px;margin-left:-8px}
+.create-post{background:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px}
+.avatar{width:40px;height:40px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;background-size:cover}
+.input{flex:1;background:#f0f2f5;border:1px solid #ddd;border-radius:20px;padding:10px 14px;font-size:16px}
+.story-wrap{background:#fff;padding:10px 6px;display:flex;gap:8px;overflow-x:auto;margin-top:8px}
+.story{min-width:110px;height:180px;border-radius:15px;position:relative;background-size:cover;background-position:center;overflow:hidden;flex-shrink:0;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.story.bottom{position:absolute;bottom:0;background:linear-gradient(transparent, rgba(0,0,0,.7));width:100%;padding:8px;color:#fff;font-size:12px;font-weight:bold}
+.story.plus{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:#0866ff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;border:3px solid #fff}
+.ring{position:absolute;top:8px;left:8px;width:36px;height:36px;border-radius:50%;border:3px solid #0866ff;overflow:hidden;background:#fff}
+.post-card{background:#fff;margin-top:8px}
+.post-head{display:flex;justify-content:space-between;padding:10px 12px;align-items:center}
+.post-info{display:flex;gap:8px;align-items:center}
+.p-avatar{width:40px;height:40px;border-radius:50%;background:#eee;border:2px solid #0866ff;padding:2px}
+.p-avatar img{width:100%;height:100%;border-radius:50%}
+.p-name{font-weight:bold;font-size:15px}
+.p-time{font-size:12px;color:#65676b}
+.p-text{padding:0 12px 10px;font-size:15px;line-height:1.3}
+.p-img{width:100%;display:block;max-height:600px;object-fit:cover}
+.p-actions{display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #ddd;margin:0 12px}
+.p-actions button{flex:1;background:none;border:0;padding:8px;color:#65676b;font-weight:600;font-size:14px}
+textarea{width:100%;border:0;outline:none;resize:none}
 </style>
 </head>
 <body>
 
-<div class="nav">
-<div class="logo">fba</div>
-<input placeholder="🔍 Search F-B-A">
-<div style="display:flex;gap:10px;align-items:center">
-<span style="font-weight:bold">{{user}}</span>
-<a href="/logout" style="text-decoration:none;color:#fff;background:#e4e6eb;color:#000;padding:6px 12px;border-radius:20px">Logout</a>
+<div class="top">
+<div class="top1">
+<div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">☰</span><span class="logo">facebook</span></div>
+<div class="icons"><span class="icon-btn">＋</span><span style="font-size:26px">⌕</span><span class="icon-btn" style="background:#000;color:#fff">M</span></div>
+</div>
+<div class="tabs">
+<div class="tab active">⌂</div>
+<div class="tab">▶<span class="badge">7</span></div>
+<div class="tab">👥</div>
+<div class="tab">🏪<span class="badge">1</span></div>
+<div class="tab">🔔</div>
+<div class="tab">◯</div>
 </div>
 </div>
 
-<div class="layout">
-<div class="left">
-<div class="card">
-<div class="pro"><div class="avatar">{{user[0]}}</div><b>{{user}}</b></div>
-<button onclick="document.getElementById('editPro').style.display='block'" class="btn btn-gray" style="margin-top:12px">✏️ Edit Profile</button>
-<div id="editPro" style="display:none;margin-top:10px;border-top:1px solid #ddd;padding-top:10px">
-<p style="font-size:13px;color:#65676b">Profile Edit (Soon you can add bio, cover photo)</p>
-<input placeholder="Write your bio" style="width:100%;padding:8px;margin-top:6px;border:1px solid #ccc;border-radius:6px">
-<button class="btn btn-blue" style="margin-top:6px" onclick="alert('Profile Updated! (Demo)')">Save</button>
+<!-- What's on your mind -->
+<div class="create-post">
+<div class="avatar" style="background-image:url('https://i.pravatar.cc/100?u={{user}}')">{{user[0]}}</div>
+<form method="POST" action="/post" enctype="multipart/form-data" style="flex:1;display:flex;align-items:center;gap:8px">
+<input type="text" name="content" class="input" placeholder="What's on your mind?">
+<label style="font-size:26px;cursor:pointer">🖼️<input type="file" name="file" accept="image/*,video/*" hidden onchange="this.form.submit()"></label>
+</form>
 </div>
+
+<!-- Stories -->
+<div class="story-wrap">
+<div class="story" style="background:#fff;border:1px solid #ddd">
+<div style="height:65%;background:#000;background-image:url('https://i.pravatar.cc/150?u={{user}}');background-size:cover"></div>
+<div class="plus">+</div>
+<div style="padding:32px 5px 5px;text-align:center;font-size:12px;font-weight:bold;background:#fff">Create story</div>
 </div>
-<div class="card" style="font-size:14px;color:#050505;line-height:2">📺 Watch
+<div class="story" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=12" style="width:100%"></div><div class="bottom">Md Meraj Hossain</div></div>
+<div class="story" style="background-image:url('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=33" style="width:100%"></div><div class="bottom">Sv tech</div></div>
+<div class="story" style="background-image:url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=300')"><div class="ring"><img src="https://i.pravatar.cc/50?img=20" style="width:100%"></div><div class="bottom">More Stories</div></div>
+</div>
+
+<!-- Posts Loop -->
+{% for p in posts %}
+<div class="post-card">
+<div class="post-head">
+<div class="post-info">
+<div class="p-avatar"><img src="https://i.pravatar.cc/100?u={{p[1]}}"></div>
+<div><div class="p-name">{{p[1]}} <span style="color:#0866ff">✔</span></div><div class="p-time">{{p[4]}} · ⚙</div></div>
+</div>
+<div style="display:flex;gap:14px;font-size:20px;color:#65676b"><span>⋯</span><span>✕</span></div>
+</div>
+<div class="p-text">{{p[2]}}</div>
+{% if p[3] %}
+  {% if '.mp4' in p[3] %}<video src="{{p[3]}}" controls class="p-img"></video>
+  {% else %}<img src="{{p[3]}}" class="p-img">{% endif %}
+{% endif %}
+<div class="p-actions"><button>👍 Like</button><button>💬 Comment</button><button>↗ Share</button></div>
+</div>
+{% endfor %}
+
+<!-- Demo post like your screenshot -->
+{% if not posts %}
+<div class="post-card">
+<div class="post-head"><div class="post-info"><div class="p-avatar"><img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png"></div><div><div class="p-name">PizzaBurg <span style="color:#0866ff">✔</span></div><div class="p-time">14h · ⚙</div></div></div><div style="display:flex;gap:14px;font-size:20px;color:#65676b"><span>⋯</span><span>✕</span></div></div>
+<div class="p-text">দেশের সেরা বিফ চাপ পিৎজা!</div>
+<img src="https://i.ibb.co/8gZfZxT/buffalo.jpg" onerror="this.src='https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=600'" class="p-img">
+<div class="p-actions"><button>👍 Like</button><button>💬 Comment</button><button>↗ Share</button></div>
+</div>
+{% endif %}
+
+</body>
+</html>
