@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head><title>FBA - Register</title></head>
-<body>
-<h2>Register - FBA</h2>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F-B-A - Sign Up</title>
+</head>
+<body style="margin:0;background:#f0f2f5;font-family:SFProDisplay-Regular,Arial;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:15px">
+<div style="background:white;width:100%;max-width:432px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.1);">
+<div style="padding:16px;border-bottom:1px solid #dadde1;text-align:left">
+<h2 style="margin:0;font-size:32px;line-height:38px">Sign Up</h2>
+<p style="margin:0;color:#606770;font-size:15px">It's quick and easy.</p>
+</div>
+<div style="padding:16px">
 <form method="POST">
-<input type="text" name="name" placeholder="Full Name" required><br><br>
-<input type="email" name="email" placeholder="Gmail" required><br><br>
-<input type="password" name="pass" placeholder="Password" required><br><br>
-<button type="submit">Sign Up</button>
+<div style="display:flex;gap:10px">
+<input name="first" placeholder="First name" required style="flex:1;padding:11px;background:#f5f6f7;border:1px solid #ccd0d5;border-radius:5px;font-size:15px">
+<input name="last" placeholder="Surname" required style="flex:1;padding:11px;background:#f5f6f7;border:1px solid #ccd0d5;border-radius:5px;font-size:15px">
+</div>
+<input name="email" type="text" placeholder="Mobile number or email address" required style="width:100%;padding:11px;background:#f5f6f7;border:1px solid #ccd0d5;border-radius:5px;margin-top:10px;font-size:15px;box-sizing:border-box">
+<input name="pass" type="password" placeholder="New password" required style="width:100%;padding:11px;background:#f5f6f7;border:1px solid #ccd0d5;border-radius:5px;margin-top:10px;font-size:15px;box-sizing:border-box">
+
+<label style="display:block;margin-top:12px;color:#606770;font-size:12px">Date of birth</label>
+<div style="display:flex;gap:8px;margin-top:4px">
+<select name="day" style="flex:1;padding:8px;border:1px solid #ccd0d5;border-radius:4px"><option>1</option><option>2</option><option>15</option><option>25</option></select>
+<select name="month" style="flex:1;padding:8px;border:1px solid #ccd0d5;border-radius:4px"><option>Jan</option><option>Feb</option><option>Mar</option><option>Oct</option><option>Dec</option></select>
+<select name="year" style="flex:1;padding:8px;border:1px solid #ccd0d5;border-radius:4px"><option>2005</option><option>2000</option><option>1998</option></select>
+</div>
+
+<label style="display:block;margin-top:12px;color:#606770;font-size:12px">Gender</label>
+<div style="display:flex;gap:8px;margin-top:4px">
+<label style="flex:1;border:1px solid #ccd0d5;padding:8px;border-radius:4px;display:flex;justify-content:space-between">Female <input type="radio" name="gender" value="Female" required></label>
+<label style="flex:1;border:1px solid #ccd0d5;padding:8px;border-radius:4px;display:flex;justify-content:space-between">Male <input type="radio" name="gender" value="Male"></label>
+<label style="flex:1;border:1px solid #ccd0d5;padding:8px;border-radius:4px;display:flex;justify-content:space-between">Custom <input type="radio" name="gender" value="Custom"></label>
+</div>
+
+<p style="font-size:11px;color:#777;margin-top:12px">By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy.</p>
+
+<div style="text-align:center;margin-top:15px">
+<button type="submit" style="background:#00a400;color:white;border:none;padding:0 60px;height:36px;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer">Sign Up</button>
+</div>
 </form>
-<a href="/login">Already have account? Login</a>
+<div style="text-align:center;margin-top:15px;border-top:1px solid #dadde1;padding-top:15px">
+<a href="/login" style="color:#1877f2;text-decoration:none;font-size:17px">Already have an account?</a>
+</div>
+</div>
+</div>
 </body>
 </html>
