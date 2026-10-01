@@ -38,19 +38,24 @@ def login():
         user=cur.fetchone(); con.close()
         if user:
             session["user"]=user[0]; return redirect("/")
-        return "Login Failed! Wrong Email/Password"
+        return "Login Failed!"
     return render_template("login.html")
 
+# === এইটাই নতুন Register ===
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method=="POST":
-        name=request.form.get("name"); email=request.form.get("email"); pwd=request.form.get("pass")
+        first=request.form.get("first",""); last=request.form.get("last","")
+        name = first+" "+last
+        email=request.form.get("email"); pwd=request.form.get("pass")
+        gender=request.form.get("gender","")
         try:
             con=sqlite3.connect("fba.db")
             con.execute("INSERT INTO users VALUES (?,?,?)",(name,email,pwd))
             con.commit(); con.close()
             return redirect("/login")
-        except: return "Email already exists!"
+        except:
+            return "Email already exists!"
     return render_template("register.html")
 
 @app.route("/post", methods=["POST"])
@@ -70,11 +75,6 @@ def post():
 
 @app.route("/logout")
 def logout(): session.clear(); return redirect("/login")
-
-@app.route("/reset")
-def reset():
-    if os.path.exists("fba.db"): os.remove("fba.db")
-    init_db(); return redirect("/register")
 
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=10000)
